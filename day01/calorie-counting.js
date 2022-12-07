@@ -1,8 +1,21 @@
 const fs = require('fs');
 
-// TODO: optimize :)
+const partOne = () => {
+  const arr = fs.readFileSync('./input.txt', 'utf-8').split('\n');
+  let [maxCount, currCount] = [0, 0];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (arr[i] === '') {
+      maxCount = Math.max(maxCount, currCount);
+      currCount = 0;
+    } else {
+      currCount += parseInt(arr[i]);
+    }
+  }
 
-const topThreeCalories = () => {
+  return maxCount;
+};
+
+const partTwo = () => {
   const arr = fs.readFileSync('./input.txt', 'utf-8').split('\n');
   // each empty string = new elf
   // store in arr, sort, return top 3
@@ -23,3 +36,5 @@ const topThreeCalories = () => {
   values.sort((a, b) => b - a);
   return values[0] + values[1] + values[2];
 };
+
+console.log(partTwo());
